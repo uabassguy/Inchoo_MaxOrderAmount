@@ -12,7 +12,7 @@
         <sales translate="label" module="sales">
             <groups>
                 <inchoo_maxorderamount>
-                    <label>Maximum Order Amount</label>
+                    <label>Maximum Item Amount</label>
                     <sort_order>51</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
@@ -28,8 +28,8 @@
                             <show_in_store>0</show_in_store>
                         </active>
                         <single_order_top_amount>
-                            <label>Single Order Maximum Amount</label>
-                            <comment><![CDATA[No single order can be placed over X amount, where X is an integer value which defaults to 1500.]]></comment>  
+                            <label>Single Item Maximum Amount</label>
+                            <comment><![CDATA[No single item in cart over X amount, where X is an integer value which defaults to 1500.]]></comment>  
                             <frontend_type>text</frontend_type>
                             <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
@@ -37,8 +37,8 @@
                             <show_in_store>0</show_in_store>                            
                         </single_order_top_amount>
                         <single_order_top_amount_msg>
-                            <label>Single Order Maximum Amount Message</label>
-                            <comment><![CDATA[Message to be displayed to customer when "Single Order Top Amount" condition limit is triggered. Defaults to "No single order allowed with amount over %s.". Please use "%s" to position the amount value within the message string.]]></comment>  
+                            <label>Single Item Maximum Amount Message</label>
+                            <comment><![CDATA[Message to be displayed to customer when "Single Item Top Amount" condition limit is triggered. Defaults to "No single order allowed with amount over %s.". Please use "%s" to position the amount value within the message string.]]></comment>  
                             <frontend_type>text</frontend_type>
                             <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
