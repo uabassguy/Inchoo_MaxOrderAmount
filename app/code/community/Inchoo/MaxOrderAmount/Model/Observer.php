@@ -15,7 +15,7 @@ class Inchoo_MaxOrderAmount_Model_Observer
     }
 
     /**
-     * No single order can be placed over the amount of X
+     * No single item in the cart more than X
      */
     public function enforceSingleOrderLimit($observer)
     {
@@ -25,7 +25,22 @@ class Inchoo_MaxOrderAmount_Model_Observer
 
         $quote = $observer->getEvent()->getQuote();
         
-        if ((float)$quote->getGrandTotal() > (float)$this->_helper->getSingleOrderTopAmount()) {
+        foreach ($quote->getAllItems() as $item) {
+		if ((float)$item->getQty() > (float)$this->_helper->getSingleOrderTopAmount()) {
+			//$formattedPrice = Mage::helper('core')->currency($this->_helper->getSingleOrderTopAmount(), true, false);
+			
+			$maxQty = $this->_helper->getSingleOrderTopAmount();
+			
+			Mage::getSingleton('checkout/session')->addError(
+				$this->_helper->__($this->_helper->getSingleOrderTopAmountMsg(), $maxQty));
+
+			Mage::app()->getFrontController()->getResponse()->setRedirect(Mage::getUrl('checkout/cart'));
+			Mage::app()->getResponse()->sendResponse();
+			exit;
+		}
+	}
+        
+        /*if ((float)$quote->getGrandTotal() > (float)$this->_helper->getSingleOrderTopAmount()) {
             
             $formattedPrice = Mage::helper('core')->currency($this->_helper->getSingleOrderTopAmount(), true, false);
             
@@ -35,7 +50,7 @@ class Inchoo_MaxOrderAmount_Model_Observer
             Mage::app()->getFrontController()->getResponse()->setRedirect(Mage::getUrl('checkout/cart'));
             Mage::app()->getResponse()->sendResponse();
             exit;
-        }
+        }*/
     }
     
     /**
